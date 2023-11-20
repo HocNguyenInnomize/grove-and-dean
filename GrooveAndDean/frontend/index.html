@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Dog API Demo</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<img>
+<h1>Dog Image</h1>
+<img id="dog-image" alt="Random Dog Image">
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    fetch('https://localhost:7102/Dog/api/image/random')
+      .then(async response => {
+        const { message } = await response.json();
+
+        return message;
+      })
+      .then(imageUrl => {
+        console.log(imageUrl);
+        const imgElement = document.getElementById('dog-image');
+
+        imgElement.src = imageUrl;
+      })
+      .catch(error => {
+        console.error('There was a problem fetching the image:', error);
+      });
+  });
+</script>
+</body>
+
+</html>
